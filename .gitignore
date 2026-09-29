@@ -6,11 +6,11 @@
 *.elf
 *.nso
 
-# Work & Unpacked Assets
+# Temporary Work & Dumps
 work/
 unpacked/
-romfs/
-exefs/
+/romfs/
+/exefs/
 hf_cache/
 
 # Python & IDE
