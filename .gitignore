@@ -1,0 +1,23 @@
+# Nintendo Switch Keys & Dumps
+*.keys
+*.nsp
+*.xci
+*.nca
+*.elf
+*.nso
+
+# Work & Unpacked Assets
+work/
+unpacked/
+romfs/
+exefs/
+hf_cache/
+
+# Python & IDE
+__pycache__/
+*.pyc
+.env
+.venv/
+.idea/
+.vscode/
+*.log
