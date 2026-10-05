@@ -6,12 +6,15 @@
 *.elf
 *.nso
 
-# Temporary Work & Dumps
+# Temporary / Build Artifacts
 work/
 unpacked/
 /romfs/
 /exefs/
 hf_cache/
+target/
+bin/
+obj/
 
 # Python & IDE
 __pycache__/

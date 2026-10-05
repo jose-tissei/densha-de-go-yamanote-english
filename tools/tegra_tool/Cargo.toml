@@ -1,0 +1,10 @@
+[package]
+name = "tegra_tool"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tegra_swizzle = "0.4"
+image_dds = "0.7.2"
+image = "0.25"
+
