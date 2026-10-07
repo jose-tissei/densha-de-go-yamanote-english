@@ -2,6 +2,19 @@ use std::env;
 use std::fs;
 use image_dds::{ImageFormat, Mipmaps, Quality, SurfaceRgba8};
 use tegra_swizzle::surface::{deswizzle_surface, swizzle_surface, BlockDim};
+use tegra_swizzle::BlockHeight;
+
+fn bh_arg(a: Option<&String>) -> Option<BlockHeight> {
+    match a.map(|s| s.as_str()) {
+        Some("1") => Some(BlockHeight::One),
+        Some("2") => Some(BlockHeight::Two),
+        Some("4") => Some(BlockHeight::Four),
+        Some("8") => Some(BlockHeight::Eight),
+        Some("16") => Some(BlockHeight::Sixteen),
+        Some("32") => Some(BlockHeight::ThirtyTwo),
+        _ => None,
+    }
+}
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -29,8 +42,8 @@ fn main() {
             height,
             1,
             &input_bytes,
-            BlockDim::block_4x4(),
-            None,
+            if args.get(8).map(|x| x=="1").unwrap_or(false) { BlockDim::uncompressed() } else { BlockDim::block_4x4() },
+            bh_arg(args.get(7)),
             bpb,
             1,
             1,
@@ -55,8 +68,8 @@ fn main() {
             height,
             1,
             &input_bytes,
-            BlockDim::block_4x4(),
-            None,
+            if args.get(8).map(|x| x=="1").unwrap_or(false) { BlockDim::uncompressed() } else { BlockDim::block_4x4() },
+            bh_arg(args.get(7)),
             bpb,
             1,
             1,
@@ -106,5 +119,26 @@ fn main() {
         uexp_bytes[data_start..data_end].copy_from_slice(&swizzled);
         fs::write(out_uexp, uexp_bytes).expect("Failed to write output uexp");
         println!("Successfully created patched uexp at {}", out_uexp);
+    } else if cmd == "encode_bc7" {
+        // encode_bc7 <in_png> <out_bin> [block_height]  -> Tegra-swizzled BC7 (mip0 only)
+        let img = image::open(&args[2]).expect("Failed to open input PNG").to_rgba8();
+        let (width, height) = (img.width(), img.height());
+        let surface = SurfaceRgba8::from_image(&img);
+        let encoded = surface
+            .encode(ImageFormat::BC7RgbaUnorm, Quality::Normal, Mipmaps::Disabled)
+            .expect("Failed to encode to BC7");
+        let swizzled = swizzle_surface(width, height, 1, &encoded.data, BlockDim::block_4x4(), bh_arg(args.get(4)), 16, 1, 1)
+            .expect("Failed to swizzle");
+        fs::write(&args[3], &swizzled).expect("write");
+        println!("{}x{} -> {} bytes", width, height, swizzled.len());
+    } else if cmd == "encode_bgra" {
+        // encode_bgra <in_png> <out_bin> [block_height] -> Tegra-swizzled raw BGRA8 (mip0 only)
+        let img = image::open(&args[2]).expect("open").to_rgba8();
+        let (width, height) = (img.width(), img.height());
+        let mut raw = img.into_raw();
+        for px in raw.chunks_mut(4) { px.swap(0, 2); }
+        let swizzled = swizzle_surface(width, height, 1, &raw, BlockDim::uncompressed(), bh_arg(args.get(4)), 4, 1, 1).expect("swizzle");
+        fs::write(&args[3], &swizzled).expect("write");
+        println!("{}x{} -> {} bytes", width, height, swizzled.len());
     }
 }

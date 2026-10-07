@@ -12,21 +12,34 @@ Complete English translation patch for **Densha de GO!! Hashirou Yamanote-sen** 
 
 ## 🌟 Translation Scope & Highlights
 
-- **100% of In-Game Text & Dialog:** Over 2,800 strings translated across menus, tutorials, missions, rankings, and sound subtitles.
-- **All 38 DataTables Patched:** Complete translation of all gameplay data tables (mission briefings, route descriptions, badges, wappens, station announcements, and in-game tips).
-- **Translated UI Textures:**
-  - Save/Confirmation dialog Yes/No buttons rendered directly from the original game typeface (**FOT-Rodin Pro EB**).
-  - Authentic multi-pass neon cyan glowing shader effects matching the native UI aesthetics.
-  - Tegra X1 Block-Linear swizzled BC7 compression.
+- **100% of In-Game Text & Dialog:** Over 3,655 strings translated across menus, tutorials, missions, rankings, announcements, and subtitles with 0 missing strings.
+- **All 38 Gameplay DataTables Patched:** Complete translation of all mission briefings, route descriptions, badges, wappens, station announcements, and in-game tips.
+- **Complete English HUD Textures (All 6 Trains):**
+  - E235 Series, E233 Series, E231 Series 500 Subseries, 205 Series, 103 Series, and E259 Series Narita Express.
+  - Fully translated Speedometers, Speed Limit bases, Air Pressure (kPa) meters, Emergency Brake indicators (EMG), Stop Position / Stop Time indicators, and Ridership gauges.
+- **Complete English Menu & Results Screens:**
+  - Title Screen: Authentic Yamanote green "GAME START" button (normal and glowing selected states).
+  - Main Menu: Header banners and mode titles.
+  - Driver's Path: Progress and mastery badges.
+  - Mission Result: Arrival time offsets ("Arrival Ahead" / "Arrival Late"), delay indicator, and seconds.
+  - Total Result: Difficulty, Weather, Ridership, Acquired Score, High Score, and Rank headers.
+  - Free Mode: Weather (Clear, Rain, Snow), Time of Day (Morning, Day), Ridership levels, and full configuration side panel headers.
+  - Daily Roulette: Route Selection and draw instruction banners.
+  - Options: Brightness calibration ("Dark" / "Bright"), Master Controller notch diagrams, Near Zero and Double Zero indicators.
+- **Complete Tutorial & Train Profile Cards:**
+  - Futaba Kasuga full character profile card.
+  - Complete historical and technical overview cards for all trains (185, 215, 251, E217, E231, E233, E235, E259 series).
+  - In-game tutorial explanation diagrams and score penalty callouts.
+- **Authentic Typographical & Shader Quality:**
+  - Authentic game typeface (**FOT-Rodin Pro EB / M / DB** and **Roboto Bold**).
+  - Tegra X1 Block-Linear swizzled BC7 and BGRA compression for seamless, artifact-free Switch rendering.
+  - Multi-pass neon cyan glowing shader effects matching native UI aesthetics.
 - **Accurate Railway Terminology:**
   - Master Controller (**Mascon / マスコン**) and brake notches (B1–B8, EB).
   - Authentic JR East signaling: **Proceed** (進行), **Caution** (注意), **Warning** (警戒), **Stop** (停止), **Home Signal** (場内), **Departure Signal** (出発), **Block Signals** (第1～8閉塞).
   - Train dynamics: **Acceleration** (力行), **Coasting** (惰行), **Constant Speed Zone** (定速帯), **Stopping Position** (停車位置), **Point and Call** (指差喚呼).
   - Loop directions: **Inner Loop** (内回り - Counter-clockwise) / **Outer Loop** (外回り - Clockwise).
 - **All Station Names:** Official romanized station names for all 30 Yamanote Line stations, plus Chuo, Sobu, and Osaka/Kansai routes.
-- **Bug Fixes & Polish:**
-  - Resolved string truncation on button prompt labels (e.g. `(A) Confirm`, `(B) Close`).
-  - Corrected Tegra X1 block-linear mip alignment offsets for pixel-perfect texture injection.
 
 ---
 
