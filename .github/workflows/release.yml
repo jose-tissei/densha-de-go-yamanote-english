@@ -1,0 +1,67 @@
+name: Build translation release
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "*.md"
+      - ".github/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sanity-check mod layout
+        run: |
+          set -e
+          root="atmosphere/contents/0100BC501355A000/romfs/DgocGame/Content"
+          test -d "$root" || { echo "missing $root"; exit 1; }
+          test -f "$root/Localization/Game/en/Game.locres"
+          ls "$root/Paks"/*.pak >/dev/null
+          find atmosphere -type f -size +95M -print -quit | grep . && { echo "file too large for release"; exit 1; } || true
+
+      - name: Package
+        id: pkg
+        run: |
+          set -e
+          short=$(git rev-parse --short=7 HEAD)
+          tag="build-${GITHUB_RUN_NUMBER}-${short}"
+          name="Densha_de_GO_English_Patch_${tag}"
+          mkdir -p dist
+          # Switch (Atmosphere): extract to the SD card root
+          zip -r -q "dist/${name}_Switch-Atmosphere.zip" atmosphere README.md TROUBLESHOOTING.md LICENSE
+          # Emulators (Ryujinx/Yuzu/Suyu): drop the romfs folder inside a mod folder
+          mkdir -p "emu/English Translation"
+          cp -r atmosphere/contents/0100BC501355A000/romfs "emu/English Translation/romfs"
+          (cd emu && zip -r -q "../dist/${name}_Emulator.zip" "English Translation")
+          (cd dist && sha256sum *.zip > SHA256SUMS.txt)
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+          echo "short=${short}" >> "$GITHUB_OUTPUT"
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          msg=$(git log -1 --pretty=%s)
+          gh release create "${{ steps.pkg.outputs.tag }}" dist/* \
+            --target "${GITHUB_SHA}" \
+            --title "Build ${GITHUB_RUN_NUMBER} (${{ steps.pkg.outputs.short }})" \
+            --notes "Automatic build of commit ${GITHUB_SHA}.
+
+          ${msg}
+
+          - **Switch (Atmosphere):** extract \`*_Switch-Atmosphere.zip\` to the root of the SD card.
+          - **Emulator:** extract \`*_Emulator.zip\` into the game's mods directory.
+          - Requires your own copy of the game. See TROUBLESHOOTING.md." \
+            --prerelease
