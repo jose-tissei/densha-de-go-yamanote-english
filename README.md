@@ -1,6 +1,6 @@
 # Densha de GO!! Hashirou Yamanote-sen — English Translation Mod
 
-Complete English translation patch for **Densha de GO!! Hashirou Yamanote-sen** (電車でGO！！ はしろう山手線) on Nintendo Switch.
+English translation patch for **Densha de GO!! Hashirou Yamanote-sen** (電車でGO！！ はしろう山手線) on Nintendo Switch.
 
 - **Title ID:** `0100BC501355A000`
 - **Engine:** Unreal Engine 4 (UE4.25 Cooked Switch Build)
@@ -12,8 +12,8 @@ Complete English translation patch for **Densha de GO!! Hashirou Yamanote-sen** 
 
 ## 🌟 Translation Scope & Highlights
 
-- **100% of In-Game Text & Dialog:** Over 3,655 strings translated across menus, tutorials, missions, rankings, announcements, and subtitles with 0 missing strings.
-- **All 38 Gameplay DataTables Patched:** Complete translation of all mission briefings, route descriptions, badges, wappens, station announcements, and in-game tips.
+- **In-Game Text & Dialog:** Roughly 4,300 strings translated across menus, tutorials, mission names and descriptions, mission goals, unlock messages, help and loading-tip text, rankings, announcements, and subtitles. A few leftovers remain (see Known Gaps).
+- **Gameplay DataTables Patched:** Mission briefings, route descriptions, badges, wappens, station announcements, Support/loading tips, mission goals and reward messages.
 - **Complete English HUD Textures (All 6 Trains):**
   - E235 Series, E233 Series, E231 Series 500 Subseries, 205 Series, 103 Series, and E259 Series Narita Express.
   - Fully translated Speedometers, Speed Limit bases, Air Pressure (kPa) meters, Emergency Brake indicators (EMG), Stop Position / Stop Time indicators, and Ridership gauges.
@@ -40,6 +40,15 @@ Complete English translation patch for **Densha de GO!! Hashirou Yamanote-sen** 
   - Train dynamics: **Acceleration** (力行), **Coasting** (惰行), **Constant Speed Zone** (定速帯), **Stopping Position** (停車位置), **Point and Call** (指差喚呼).
   - Loop directions: **Inner Loop** (内回り - Counter-clockwise) / **Outer Loop** (外回り - Clockwise).
 - **All Station Names:** Official romanized station names for all 30 Yamanote Line stations, plus Chuo, Sobu, and Osaka/Kansai routes.
+
+---
+
+## Known Gaps
+
+- Some Japanese text is baked into small embedded game screenshots inside help pages and a few HUD/result sample images; these are not translated.
+- Station-name map labels and route lists are translated with overlays; a few spots may still look slightly rough.
+- English labels are longer than the Japanese originals in places, so some HUD info bars can overlap.
+- Developer-only strings (test missions, placeholder text) are intentionally left untouched.
 
 ---
 
