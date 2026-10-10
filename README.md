@@ -8,6 +8,22 @@ English translation patch for **Densha de GO!! Hashirou Yamanote-sen** (電車�
 
 ![Save Dialog English](media/screenshot_save_dialog.png)
 
+## 📊 Translation Progress
+
+| Area | Progress | Notes |
+|---|---|---|
+| Game text (menus, missions, tips, dialogs) | `████████████████████` **99%** | ~99% of ~2,200 unique strings found; dev-only placeholders excluded |
+| Image textures (HUD, menus, maps, help pages) | `█████████████████░░░` **84%** | 235 of 280 Japanese-bearing textures patched (some remaining flags are false positives); small text inside embedded screenshots remains |
+| **Overall (average)** | `██████████████████░░` **91%** | Estimated; see Known Gaps |
+
+## 📸 Screenshots
+
+| | |
+|---|---|
+| ![Save select](media/screenshot_save_select.png) | ![Main menu](media/screenshot_main_menu.png) |
+| ![Driver's Path](media/screenshot_drivers_path.png) | ![Train card](media/screenshot_train_card.png) |
+| ![Mission goals](media/screenshot_mission_goals.png) | ![Driving HUD](media/screenshot_driving_hud.png) |
+
 ---
 
 ## 🌟 Translation Scope & Highlights
